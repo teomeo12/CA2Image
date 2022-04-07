@@ -6,11 +6,11 @@
 #include <iomanip>
 #include <cstring>
 #include "Image.h"
-
+using namespace std;
 
 
 bool Image::load(string filename) {
-    std::ifstream ifs;
+    ifstream ifs;
     ifs.open(filename, std::ios::binary);
     // need to spec. binary mode for Windows users
     try {
@@ -55,19 +55,32 @@ bool Image::savePPM(string filename)
 
 void Image::filterRed()
 {
-
+    for(int i=0; i < w*h;i++){
+        pixels[i].b=0;
+        pixels[i].g=0;
+    }
 }
 void Image::filterGreen()
 {
-
+    for(int i=0; i < w*h;i++){
+        pixels[i].b=0;
+        pixels[i].r=0;
+    }
 }
 void Image::filterBlue()
 {
-
+    for(int i=0; i < w*h;i++){
+        pixels[i].r=0;
+        pixels[i].g=0;
+    }
 }
 void Image::greyScale()
 {
-
+    for (int i = 0; i < w * h; ++i) {
+        pixels[i].r = (pixels[i].r + pixels[i].g + pixels[i].b) / 3;
+        pixels[i].g = (pixels[i].r + pixels[i].g + pixels[i].b) / 3;
+        pixels[i].b = (pixels[i].r + pixels[i].g + pixels[i].b) / 3;
+    }
 }
 void Image::flipHorizontal()
 {
