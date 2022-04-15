@@ -30,6 +30,10 @@ class Image {
     }
 
     unsigned int w, h;
+    float pixelArray[3][3];
+    float gamma =1.0f;
+    unsigned char r,g, b;
+
     Rgb *pixels;
 public:
     Image() : w(300), h(400)
@@ -45,8 +49,8 @@ public:
     void greyScale();
     void flipHorizontal();
     void flipVertically();
-    void AdditionalFunction1();
-    void AdditionalFunction2();
+    void AdditionalFunction1_Noise();
+    void AdditionalFunction2_Invert();
     void AdditionalFunction3();
 
     /*Functions used in the GUI - DO NOT MODIFY */
