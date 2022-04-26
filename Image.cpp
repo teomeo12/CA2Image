@@ -226,7 +226,16 @@ void Image::AdditionalFunction1_Noise() {
     }
 
 }
+void Image::Gamma(){
+    for(int i = 0; i < w*h; i++)
+    {
+        float gamma =1/3.2;
 
+        this->pixels[i].r  = pow(pixels[i].r / 255.0f, gamma) * 255;
+        this->pixels[i].g  = pow(pixels[i].g / 255.0f, gamma) * 255;
+        this->pixels[i].b  = pow(pixels[i].b / 255.0f, gamma) * 255;
+    }
+}
 /* Functions used by the GUI - DO NOT MODIFY */
 int Image::getWidth() {
     return w;
