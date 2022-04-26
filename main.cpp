@@ -53,7 +53,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD1, L"&Additional Function 1 - Noise"); // Copy this line to add
     AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD2, L"&Additional Function 2 - Invert colors"); // Copy this line to add
     AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD3, L"&Additional Function 3 - Not Ready"); // Copy this line to add
-     // Copy this line to add
+    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD3, L"&Gamma"); // Copy this line to add
+
+    // Copy this line to add
 
 
 
@@ -126,6 +128,10 @@ void processMenu(HWND hWnd, WPARAM wParam)
         case IDM_EDIT_AD2:
 
             image->AdditionalFunction2_Invert();
+            break;
+        case IDM_EDIT_AD3:
+
+            image->AdditionalFunction3();
             break;
         case IDM_EDIT_AD3:
 

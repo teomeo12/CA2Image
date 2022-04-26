@@ -52,6 +52,7 @@ public:
     void AdditionalFunction1_Noise();
     void AdditionalFunction2_Invert();
     void AdditionalFunction3();
+    void Gamma();
 
     /*Functions used in the GUI - DO NOT MODIFY */
     Rgb* getImage();
