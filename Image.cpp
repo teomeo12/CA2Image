@@ -158,41 +158,41 @@ void Image::flipVertically() {
         }
     }
 }
-void Image::AdditionalFunction3() {
-    //    for (int i = 0; i < w * h; ++i) {
-//        pixels[i].r = (pixels[i].r + pixels[i].g + pixels[i].b) ;
-//        pixels[i].g = (pixels[i].r + pixels[i].g + pixels[i].b) ;
-//        pixels[i].b = (pixels[i].r + pixels[i].g + pixels[i].b) ;
-//
-//        pixels[i].r = pow(double(pixels[i].r*3), double(gamma));
-//        pixels[i].g = pow(double(pixels[i].g*3), double(gamma));
-//        pixels[i].b = pow(double(pixels[i].b*3), double(gamma));
-//    }
-//
-//    for(int c = 0;  c< w/2;c++)    //x axis
-//    {
-//        for(int r = 0; r < h; r++)  //y axis
-//        {
-//           r=pixels[(r * w + c)]*3;
-//            swap(this->pixels[(r * w + c)].g,this->pixels[(r * w + (w - c))].g);
-//            swap(this->pixels[(r * w + c)].b ,this->pixels[(r * w + (w - c))].b);
-//        }
-//    }
-    for(int y =0; y<h;y++){
-        for(int x= 0;x<w;x++){
-            r = pixels[(y * w + x)*3+0].r;
-            g = pixels[(y * w + x)*3+1].g;
-            b = pixels[(y * w + x)*3+2].b;
+//Rotate image 90 degree clockwise
+void Image::rotate90() {
+    Image *rot90Image = new Image(h, w);
 
-            this->pixels[(y * w + x)*3+0].r = pow(double(r), double(gamma));
-            this->pixels[(y * w + x)*3+0].g = pow(double(g), double(gamma));
-            this->pixels[(y * w + x)*3+0].b = pow(double(b), double(gamma));
+    for(int i = 0; i < w; i++)
+    {
+        for(int j = 0; j < h; j++)
+        {
+            int shift = h * i + j;
+            rot90Image->pixels[shift] = this->pixels[w * (h - 1 - j) + i];
         }
     }
-
+    swap(w,h);
+    delete[] this->pixels;
+    this->pixels = rot90Image->pixels;
+    rot90Image = nullptr;
 }
+
+
+//Blur function
+void Image::blur() {
+    Image *blurImage = new Image(w, h);
+    for (int i = 0; i < w * h; i++) {
+        blurImage->pixels[i].r = (pixels[i].r + pixels[i + 1].r + pixels[i + w].r + pixels[i + w + 1].r) / 5;
+        blurImage->pixels[i].g = (pixels[i].g + pixels[i + 1].g + pixels[i + w].g + pixels[i + w + 1].g) / 5;
+        blurImage->pixels[i].b = (pixels[i].b + pixels[i + 1].b + pixels[i + w].b + pixels[i + w + 1].b) / 5;
+    }
+    swap(w, h);
+    swap(w, h);
+    delete[] this->pixels;
+    this->pixels = blurImage->pixels;
+    blurImage = nullptr;
+}
+//Invert function
 void Image::AdditionalFunction2_Invert() {
-    //Invert colours
 
 
     for(int i=0; i< w * h;i++){
@@ -200,10 +200,8 @@ void Image::AdditionalFunction2_Invert() {
         this->pixels[i].g =255 -  this->pixels[i].g;
         this->pixels[i].b =255 -  this->pixels[i].b;
     }
-
-
 }
-
+//Noise function
 void Image::AdditionalFunction1_Noise() {
     for (int i = 0; i < w * h; ++i) {
         pixels[i].r = (pixels[i].r + pixels[i].g + pixels[i].b)/3 ;
@@ -226,10 +224,11 @@ void Image::AdditionalFunction1_Noise() {
     }
 
 }
+//Gamma function
 void Image::Gamma(){
     for(int i = 0; i < w*h; i++)
     {
-        float gamma =1/3.2;
+        float gamma =2/3.2;
 
         this->pixels[i].r  = pow(pixels[i].r / 255.0f, gamma) * 255;
         this->pixels[i].g  = pow(pixels[i].g / 255.0f, gamma) * 255;

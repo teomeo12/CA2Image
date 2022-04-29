@@ -51,14 +51,18 @@ public:
     void flipVertically();
     void AdditionalFunction1_Noise();
     void AdditionalFunction2_Invert();
-    void AdditionalFunction3();
+    void rotate90();
     void Gamma();
-
+    void blur();
+    void AdditionalFunction4();
     /*Functions used in the GUI - DO NOT MODIFY */
     Rgb* getImage();
     int getWidth();
     int getHeight();
+
+
     ~Image() { if (pixels != nullptr) delete [] pixels; }
+
 
 };
 

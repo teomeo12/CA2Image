@@ -21,6 +21,8 @@ using namespace std;
 #define IDM_EDIT_AD2 12
 #define IDM_EDIT_AD3 13
 #define IDM_EDIT_AD4 15
+#define IDM_EDIT_AD5 16
+#define IDM_EDIT_AD6 17
 #define IDM_FILE_LOAD_RAW 14
 string current_file;
 string fileType;
@@ -51,10 +53,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     AppendMenuW(Alter, MF_STRING, IDM_EDIT_FilterGreen, L"&Show Only Green"); // Copy this line to add
     AppendMenuW(Alter, MF_STRING, IDM_EDIT_FilterBlue, L"&Show Only Blue"); // Copy this line to add
     AppendMenuW(Alter, MF_SEPARATOR, 0, NULL);
-    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD1, L"&Additional Function 1 - Noise"); // Copy this line to add
-    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD2, L"&Additional Function 2 - Invert colors"); // Copy this line to add
-    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD3, L"&Additional Function 3 - Not Ready"); // Copy this line to add
+    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD1, L"&Noise"); // Copy this line to add
+    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD2, L"&Invert colors"); // Copy this line to add
+    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD3, L"&Rotate 90 degrees"); // Copy this line to add
+    AppendMenuW(Alter, MF_SEPARATOR, 0, NULL);
     AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD4, L"&Gamma"); // Copy this line to add
+    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD5, L"&Blur"); // Copy this line to add
+
+
 
     // Copy this line to add
 
@@ -132,12 +138,17 @@ void processMenu(HWND hWnd, WPARAM wParam)
             break;
         case IDM_EDIT_AD3:
 
-            image->AdditionalFunction3();
+            image->rotate90();
             break;
         case IDM_EDIT_AD4:
 
             image->Gamma();
             break;
+        case IDM_EDIT_AD5:
+
+            image->blur();
+            break;
+
         case IDM_EDIT_Reset:
             if(fileType=="ppm")
             {
