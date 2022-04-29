@@ -159,6 +159,7 @@ void Image::flipVertically() {
     }
 }
 //Rotate image 90 degree clockwise
+
 void Image::rotate90() {
     Image *rot90Image = new Image(h, w);
 
